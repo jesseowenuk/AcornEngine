@@ -1,0 +1,25 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Build Acorn",
+            "windows": {
+                "command": "${workspaceFolder}/build.bat"
+            },
+            "linux": {
+                "command": "${workspaceFolder}/build.sh"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": { 
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Build Acorn Engine"
+        }
+    ]
+}
