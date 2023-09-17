@@ -4,7 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/source/**",
-                "${VULKAN_SDK}/include"
+                "${workspaceFolder}/source/acorn/core/log"
             ],
             "defines": [
                 "_DEBUG",
