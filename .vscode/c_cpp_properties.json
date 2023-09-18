@@ -4,7 +4,8 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/source/**",
-                "${workspaceFolder}/source/acorn/core/log"
+                "${workspaceFolder}/source/modules/log",
+                "${workspaceFolder}/source/acornlib/"
             ],
             "defines": [
                 "_DEBUG",

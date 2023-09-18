@@ -1,7 +1,7 @@
 #ifndef LOG_LOG_H
 #define LOG_LOG_H
 
-#include "defines.h"
+#include "ALI_defines.h"
 
 // which log levels are on/off
 #define LOG_LEVEL_WARN_ON 1

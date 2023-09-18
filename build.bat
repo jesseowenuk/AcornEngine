@@ -11,7 +11,7 @@ FOR /R %%f in (*.c) do (
 SET program=acorn
 SET compilerFlags=-g -Wvarargs -Wall -Werror
 
-SET includeFlags=-Isrc -I%VULKAN_SDK%/include
+SET includeFlags=-Isource -Isource/modules/log -Isource/acornlib/ -I%VULKAN_SDK%/include
 SET linkerFlags=-luser32 -lvulkan-1 -L%VULKAN_SDK%/Lib
 SET defines=-D_DEBUG -D_CRT_SECURE_NO_WARNINGS
 
