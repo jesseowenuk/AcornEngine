@@ -14,7 +14,7 @@
         #define debugBreak() __builtin_trap()
     #endif
 
-    void ALI_reportAssertionFailure(const char* expression, const char* message, const char* file, int32 line);
+    void ALI_ReportAssertionFailure(const char* expression, const char* message, const char* file, int32 line);
 
     #define ACN_ASSERT(expression)                                                  \
         {                                                                           \
@@ -24,7 +24,7 @@
             }                                                                       \
             else                                                                    \
             {                                                                       \
-                ALI_reportAssertionFailure(#expression, "", __FILE__, __LINE__);    \
+                ALI_ReportAssertionFailure(#expression, "", __FILE__, __LINE__);    \
                 debugBreak();                                                       \
             }                                                                       \
         }  
@@ -37,7 +37,7 @@
         }                                                                           \
         else                                                                        \
         {                                                                           \
-            ALI_reportAssertionFailure(#expression, message, __FILE__, __LINE__);   \
+            ALI_ReportAssertionFailure(#expression, message, __FILE__, __LINE__);   \
             debugBreak();                                                           \
         }                                                                           \
     }   
@@ -51,7 +51,7 @@
             }                                                                       \
             else                                                                    \
             {                                                                       \
-                ALI_reportAssertionFailure(#expression, "", __FILE__, __LINE__);    \
+                ALI_ReportAssertionFailure(#expression, "", __FILE__, __LINE__);    \
                 debugBreak();                                                       \
             }                                                                       \
         }  

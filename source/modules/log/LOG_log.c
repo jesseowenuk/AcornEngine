@@ -1,5 +1,7 @@
 #include "LOG_log.h"
 
+#include "PLT_platform.h"
+
 // TODO: Temporary
 #include <stdio.h>
 #include <string.h>
@@ -21,16 +23,16 @@ void LOG_Terminate()
 }
 
 // This is the function which will print out the log message
-void LOG_printMessage(LOG_logLevel level, const char* message, ...)
+void LOG_PrintMessage(LOG_LogLevel level, const char* message, ...)
 {
-    const char* LOG_logLevelTags[6] = { "[FATAL]: ",
+    const char* LOG_LogLevelTags[6] = { "[FATAL]: ",
                                         "[ERROR]: ",
                                         "[WARN]: ",
                                         "[INFO]: ",
                                         "[DEBUG]: ",
                                         "[TRACE]: "                              
     };
-    bool8 LOG_isError = level < LOG_LEVEL_WARN;
+    bool8 LOG_IsError = level < LOG_LEVEL_WARN;
 
     // This does create a limitation of log entries being no longer than
     // 32k characters - but really do you need more?
@@ -44,9 +46,17 @@ void LOG_printMessage(LOG_logLevel level, const char* message, ...)
     vsnprintf(messageToPrint, sizeof(messageToPrint), message, argumentPointer);
     va_end(argumentPointer);
 
-    char formattedMessageToPrint[32000];
-    sprintf(formattedMessageToPrint, "%s%s\n", LOG_logLevelTags[level], messageToPrint);
+    const int32 messageLength = 32000;
+    char formattedMessageToPrint[messageLength];
+    sprintf(formattedMessageToPrint, "%s%s\n", LOG_LogLevelTags[level], messageToPrint);
 
-    // TODO: Platform specific output
-    printf("%s", formattedMessageToPrint);
+    // Platform specific output
+    if(LOG_IsError)
+    {
+        PLT_ConsoleOutError(formattedMessageToPrint, level);
+    }
+    else
+    {
+        PLT_ConsoleOut(formattedMessageToPrint, level);
+    }
 }

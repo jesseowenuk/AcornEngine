@@ -8,9 +8,9 @@ mkdir -p bin
 filenames=$(find . -type f -name "*.c")
 
 program="acorn"
-compilerFlags="-g -fPIC"
+compilerFlags="-g -fPIC -Wvarargs -Wall -Werror"
 
-includeFlags="-Isource -Isource/modules/log -Isource/acornlib/ -I$VULKAN_SDL/include"
+includeFlags="-Isource -Isource/modules/log -Isource/acornlib/ -Isource/platform -I$VULKAN_SDL/include"
 linkerFlags="-lvulkan -lxcb -lX11 -lX11-xcb -lxkbcommon -L/usr/X11R6/lib -Wl,-rpath,."
 defines="-D_DEBUG"
 

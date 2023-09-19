@@ -2,6 +2,9 @@
 
 #include "LOG_log.h"
 
+// TODO: Test
+#include "PLT_platform.h"
+
 int main(void)
 {
     LOG_FATAL("Testing Acorn's Logging: %f", 3.14159f);
@@ -11,7 +14,17 @@ int main(void)
     LOG_DEBUG("Testing Acorn's Logging: %f", 3.14159f);
     LOG_TRACE("Testing Acorn's Logging: %f", 3.14159f);
 
-    ACN_ASSERT(150 > 200);
+    PLT_PlatformState state;
+
+    if(PLT_Init(&state))
+    {
+        while(TRUE)
+        {
+             PLT_FetchMessages(&state);
+        }
+    }
+
+    PLT_Terminate(&state);
 
     return 0;
 }

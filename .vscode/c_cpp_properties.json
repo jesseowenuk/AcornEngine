@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/source/**",
                 "${workspaceFolder}/source/modules/log",
-                "${workspaceFolder}/source/acornlib/"
+                "${workspaceFolder}/source/acornlib",
+                "${workspaceFolder/source/platform",
             ],
             "defines": [
                 "_DEBUG",
