@@ -2,6 +2,8 @@
 
 #include "LOG_log.h"
 
+#include "AKE_memory.h"
+
 // TODO: Test
 #include "PLT_platform.h"
 
@@ -11,8 +13,9 @@
 int main(void)
 {
     // Lets get initialised
+    AKE_MEMORY_Init();
     LOG_Init();
-
+    
     // TODO: Remove this testing code
     LOG_FATAL("Testing Acorn's Logging: %f", 3.14159f);
     LOG_ERROR("Testing Acorn's Logging: %f", 3.14159f);
@@ -27,6 +30,8 @@ int main(void)
     {
         bool8 acornRunning = TRUE;
 
+        LOG_INFO(AKE_MEMORY_GetUsageInfo());
+
         while(acornRunning)
         {
             if(!PLT_FetchMessages(&state))
@@ -38,7 +43,10 @@ int main(void)
         acornRunning = FALSE;
     }
 
+    // And we're done - terminate everything!
     PLT_Terminate(&state);
+    LOG_Terminate();
+    AKE_MEMORY_Terminate();
 
     return 0;
 }
