@@ -22,10 +22,10 @@ typedef char bool8;
 typedef int bool32;
 
 // Define the window info
-#define WINDOW_X 0
-#define WINDOW_Y 0
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+#define WINDOW_X 100
+#define WINDOW_Y 100
+#define WINDOW_WIDTH 1200
+#define WINDOW_HEIGHT 720
 #define WINDOW_TITLE "Acorn Engine"
 
 // Properly define static assertions

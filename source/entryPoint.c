@@ -5,8 +5,15 @@
 // TODO: Test
 #include "PLT_platform.h"
 
+/**
+ * Acorn's main entry point
+*/
 int main(void)
 {
+    // Lets get initialised
+    LOG_Init();
+
+    // TODO: Remove this testing code
     LOG_FATAL("Testing Acorn's Logging: %f", 3.14159f);
     LOG_ERROR("Testing Acorn's Logging: %f", 3.14159f);
     LOG_WARN("Testing Acorn's Logging: %f", 3.14159f);
@@ -18,10 +25,17 @@ int main(void)
 
     if(PLT_Init(&state))
     {
-        while(TRUE)
+        bool8 acornRunning = TRUE;
+
+        while(acornRunning)
         {
-             PLT_FetchMessages(&state);
+            if(!PLT_FetchMessages(&state))
+            {
+                acornRunning = FALSE;
+            }
         }
+
+        acornRunning = FALSE;
     }
 
     PLT_Terminate(&state);
