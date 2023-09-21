@@ -57,12 +57,6 @@
             return FALSE;
         }
 
-        // Define the window
-        uint32 windowX = 0;
-        uint32 windowY = 0;
-        uint32 windowWidth = 800;
-        uint32 windowHeight = 600;
-
         // https://learn.microsoft.com/en-us/windows/win32/winmsg/window-styles
         uint32 windowStyle = WS_OVERLAPPED | WS_SYSMENU | WS_CAPTION;
         // https://learn.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles
@@ -75,12 +69,12 @@
         HWND handle = CreateWindowExA(
             windowExStyle,
             "acornWindowClass",
-            "Acorn Engine",
+            WINDOW_TITLE,
             windowStyle,
-            windowX,
-            windowY,
-            windowWidth,
-            windowHeight,
+            WINDOW_X,
+            WINDOW_Y,
+            WINDOW_WIDTH,
+            WINDOW_HEIGHT,
             0,
             0,
             state->hInstance,
@@ -176,8 +170,8 @@
         // Colour the message
         HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
         // FATAL, ERROR, WARN, INFO, DEBUG, TRACE
-        static uint8 levels[6] = {64, 4, 6, 2, 1, 8};
-        SetConsoleTextAttribute(consoleHandle, levels[colour]);
+        static uint8 colourLevels[6] = {64, 4, 6, 2, 1, 8};
+        SetConsoleTextAttribute(consoleHandle, colourLevels[colour]);
 
         // Output the message to the console and debug console
         OutputDebugStringA(message);
@@ -192,8 +186,8 @@
         // Colour the message
         HANDLE consoleHandle = GetStdHandle(STD_ERROR_HANDLE);
         // FATAL, ERROR, WARN, INFO, DEBUG, TRACE
-        static uint8 levels[6] = {64, 4, 6, 2, 1, 8};
-        SetConsoleTextAttribute(consoleHandle, levels[colour]);
+        static uint8 colourLevels[6] = {64, 4, 6, 2, 1, 8};
+        SetConsoleTextAttribute(consoleHandle, colourLevels[colour]);
 
         // Output the message to the console and debug console
         OutputDebugStringA(message);
@@ -250,7 +244,7 @@
                 //uint32 width = rectangle.right - rectangle.left;
                 //uint32 height = rectangle.bottom - rectangle.top;
 
-                // TODO: We'll now need to fire an event to tell the engine to resize the window
+                // TODO: We'll now need to fire an event to tell the engine to resize the window on Windows
             }
             break;
 
@@ -261,7 +255,7 @@
             {
                 // Is this a key press or release?
                 // bool8 pressed = (message == WM_KEYDOWN || WM_SYSKEYDOWN);
-                // TODO: Handle input processing
+                // TODO: Handle input processing on Windows
             }
             break;
 
@@ -270,7 +264,7 @@
                 // Get Mouse X and Y co-ordinates
                 //int32 xMousePosition = GET_X_LPARAM(lParam);
                 //int32 yMousePosition = GET_Y_LPARAM(lParam);
-                // TODO: Handle the mouse input processing
+                // TODO: Handle the mouse input processing on Windows
             }
             break;
 
@@ -285,7 +279,7 @@
                // if(mouseScrolled != 0)
                 //{
                    // mouseScrolled = (mouseScrolled < 0) ? -1 : 1;
-                    // TODO: Handle the scroll wheel input processing 
+                    // TODO: Handle the scroll wheel input processing on Windows
                // }
             }
             break;
@@ -298,7 +292,7 @@
             case WM_RBUTTONUP:
             {
                 //bool8 pressed = (message == WM_LBUTTONDOWN || WM_MBUTTONDOWN || WM_RBUTTONDOWN);
-                // TODO: Handle mouse button click input processing
+                // TODO: Handle mouse button click input processing on Windows
             }
             break;
         }
