@@ -1,6 +1,6 @@
-#include "AKE_memory.h"
-
 #include "LOG_log.h"
+
+#include "MEM_memory.h"
 
 #include "PLT_platform.h"
 
@@ -8,13 +8,13 @@
 #include <stdio.h>
 #include <string.h>
 
-struct AKE_MEMORY_Stats
+struct MEM_Stats
 {
     uint64 totalAllocated;
-    uint64 taggedAllocations[AKE_MEMORY_TAG_MAX_TAGS];
+    uint64 taggedAllocations[MEM_TAG_MAX_TAGS];
 } AKE_MEMORY_Stats;
 
-static const char* AKE_MEMORY_TagStrings[AKE_MEMORY_TAG_MAX_TAGS] = 
+static const char* AKE_MEMORY_TagStrings[MEM_TAG_MAX_TAGS] = 
 {
     "UNKNOWN          ",
     "ARRAY            ",
@@ -33,26 +33,26 @@ static const char* AKE_MEMORY_TagStrings[AKE_MEMORY_TAG_MAX_TAGS] =
     "SCENE            "
 };
 
-static struct AKE_MEMORY_Stats memoryStats;
+static struct MEM_Stats memoryStats;
 
 // Initialise our memory system
-void AKE_MEMORY_Init()
+void MEM_Init()
 {
     PLT_ZeroMemory(&memoryStats, sizeof(memoryStats));
 }
 
 // And terminate our memory system
-void AKE_MEMORY_Terminate()
+void MEM_Terminate()
 {
 
 }
 
 // Function to allocate memory
-void* AKE_MEMORY_Allocate(uint64 size, AKE_MEMORY_Tag tag)
+void* MEM_Allocate(uint64 size, MEM_Tag tag)
 {
-    if(tag == AKE_MEMORY_TAG_UNKNOWN)
+    if(tag == MEM_TAG_UNKNOWN)
     {
-        LOG_WARN("Called AKE_MEORY_Allocate using the AKE_MEMORY_TAG_UNKNOWN. Please reclassify this allocation.");
+        LOG_WARN("Called MEM_Allocate using the MEM_TAG_UNKNOWN. Please reclassify this allocation.");
     }
 
     memoryStats.totalAllocated += size;
@@ -65,11 +65,11 @@ void* AKE_MEMORY_Allocate(uint64 size, AKE_MEMORY_Tag tag)
 }
 
 // Function to free memory
-void AKE_MEMORY_Free(void* block, uint64 size, AKE_MEMORY_Tag tag)
+void MEM_Free(void* block, uint64 size, MEM_Tag tag)
 {
-    if(tag == AKE_MEMORY_TAG_UNKNOWN)
+    if(tag == MEM_TAG_UNKNOWN)
     {
-        LOG_WARN("Called AKE_MEORY_Allocate using the AKE_MEMORY_TAG_UNKNOWN. Please reclassify this allocation.");
+        LOG_WARN("Called MEM_Allocate using the MEM_TAG_UNKNOWN. Please reclassify this allocation.");
     }
 
     // TODO: Memory alignment
@@ -79,25 +79,25 @@ void AKE_MEMORY_Free(void* block, uint64 size, AKE_MEMORY_Tag tag)
 }
 
 // Function to zero memory
-void* AKE_MEMORY_Zero(void* block, uint64 size)
+void* MEM_Zero(void* block, uint64 size)
 {
     return PLT_ZeroMemory(block, size);
 }
 
 // Function to copy memory
-void* AKE_MEMORY_Copy(void* desintation, const void* source, uint64 size)
+void* MEM_Copy(void* desintation, const void* source, uint64 size)
 {
     return PLT_CopyMemory(desintation, source, size);
 }
 
 // Function to set memory
-void* AKE_MEMORY_Set(void* destination, int32 value, uint64 size)
+void* MEM_Set(void* destination, int32 value, uint64 size)
 {
     return PLT_SetMemory(destination, value, size);
 }
 
 // This function will enable us to print out sone usage statistics
-char* AKE_MEMORY_GetUsageInfo()
+char* MEM_GetUsageInfo()
 {
     const uint64 GiB = 1024 * 1024 * 1024;
     const uint64 MiB = 1024 * 1024;
@@ -106,7 +106,7 @@ char* AKE_MEMORY_GetUsageInfo()
     char buffer[8000] = "System memory use (tagged):\n";
     uint64 offset = strlen(buffer);
 
-    for(uint32 i = 0; i < AKE_MEMORY_TAG_MAX_TAGS; ++i)
+    for(uint32 i = 0; i < MEM_TAG_MAX_TAGS; ++i)
     {
         char unit[4] = "XiB";
         float amount = 1.0f;

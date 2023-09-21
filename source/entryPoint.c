@@ -2,7 +2,7 @@
 
 #include "LOG_log.h"
 
-#include "AKE_memory.h"
+#include "MEM_memory.h"
 
 // TODO: Test
 #include "PLT_platform.h"
@@ -13,7 +13,7 @@
 int main(void)
 {
     // Lets get initialised
-    AKE_MEMORY_Init();
+    MEM_Init();
     LOG_Init();
     
     // TODO: Remove this testing code
@@ -30,7 +30,7 @@ int main(void)
     {
         bool8 acornRunning = TRUE;
 
-        LOG_INFO(AKE_MEMORY_GetUsageInfo());
+        LOG_INFO(MEM_GetUsageInfo());
 
         while(acornRunning)
         {
@@ -46,7 +46,7 @@ int main(void)
     // And we're done - terminate everything!
     PLT_Terminate(&state);
     LOG_Terminate();
-    AKE_MEMORY_Terminate();
+    MEM_Terminate();
 
     return 0;
 }
