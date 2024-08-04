@@ -5,11 +5,12 @@ CFLAGS = -O2 -pipe -Wall -Wextra
 
 INTERNAL_CFLAGS = \
 		-m16 \
-		-ffreestanding \ 
-		-nostdlib \ 
-		-fno-pic \ 
-		-mno-sse \ 
-		-mno-sse2 \ 
+		-ffreestanding \
+		-nostdlib \
+		-masm=intel \
+		-fno-pic \
+		-mno-sse \
+		-mno-sse2 \
 		-fno-stack-protector \
 		-I.
 
@@ -22,16 +23,16 @@ INTERNAL_LDFLAGS = \
 
 .PHONY: all clean
 
-C_FILES := $(shell find ./ -type f -name '*.c')
-OBJ := $(C_FILES: .c=.o)
+C_FILES := main.c
+OBJ := main.o
 
-all: acorn_loader.bin
+all: acorn_loader.img
 
-acorn_loader.bin: $(OBJ)
+acorn_loader.img: $(OBJ)
 	$(LD) $(LDFLAGS) $(INTERNAL_LDFLAGS) $(OBJ) -o $@
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INTERNAL_CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) acorn_loader.bin
+	rm -f $(OBJ) acorn_loader.img

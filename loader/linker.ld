@@ -3,7 +3,7 @@ ENTRY(main)
 
 SECTIONS
 {
-    .= 0x7C00;
+    . = 0x7C00;
 
     .text :
     {

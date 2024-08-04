@@ -2,7 +2,7 @@ cpu: count=2, reset_on_triple_fault=0
 display_library: sdl2
 megs: 512
 clock: sync=realtime, time0=local
-ata0-master: type=disk, path="acorn_loader.img", mode=flat
+ata0-master: type=disk, path="loader/acorn_loader.img", mode=flat
 boot: c
 log: ./bochsout.txt
 mouse: enabled=0
