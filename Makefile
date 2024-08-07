@@ -19,21 +19,21 @@ LDFLAGS =
 INTERNAL_LDFLAGS = \
 		-m elf_i386 \
 		-nostdlib \
-		-Tlinker.ld
+		-Tloader/linker.ld
 
 .PHONY: all clean
 
-C_FILES := main.c
-OBJ := main.o
+C_FILES := loader/main.c
+OBJ := loader/main.o
 
-all: acorn_loader.bin
+all: acorn_engine.bin
 
-acorn_loader.bin: loader/bootsect/bootsect.bin $(OBJ)
-	$(LD) $(LDFLAGS) $(INTERNAL_LDFLAGS) $(OBJ) -o stage2.bin
-	cat bootsect/bootsect.bin stage2.bin > $@
+acorn_engine.bin: loader/bootsect/bootsect.bin $(OBJ)
+	$(LD) $(LDFLAGS) $(INTERNAL_LDFLAGS) $(OBJ) -o loader/bootsect/stage2.bin
+	cat loader/bootsect/bootsect.bin loader/bootsect/stage2.bin > $@
 
 loader/bootsect/bootsect.bin: loader/bootsect/bootsect.asm
-	cd loader/bootsect && nasm bootsect.asm -fbin -o bootsect.bin
+	cd loader/bootsect && nasm bootsect.asm -fbin -o loader/bootsect/bootsect.bin
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INTERNAL_CFLAGS) -c $< -o $@
