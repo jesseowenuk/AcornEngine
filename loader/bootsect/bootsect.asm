@@ -23,7 +23,9 @@ initialise_cs:
     ;=======================================================
     ; Load Stage 2
     ;=======================================================
-    
+
+    mov si, stage2_message
+    call print_string_16
 
     cli
     hlt
@@ -39,6 +41,7 @@ initialise_cs:
     ;=======================================================
 
 loading_message db 13, 10, '<Acorn>', 13, 10, 10, 0
+stage2_message db 'stage1: Loading stage2...', 0
 drive_number db 0
 
     ;=======================================================
