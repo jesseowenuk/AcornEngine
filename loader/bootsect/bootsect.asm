@@ -27,6 +27,18 @@ initialise_cs:
     mov si, stage2_message
     call print_string_16
 
+    mov ax, 1                                           ; starting sector
+    mov ebx, 0x7e00                                     ; the buffer offset
+    mov cx, 7                                           ; number of sectors to read
+    call read_sectors
+
+    jc error
+
+error:
+    mov si, error_message
+    call print_string_16
+
+halt:
     cli
     hlt
 
@@ -35,6 +47,7 @@ initialise_cs:
     ;=======================================================
 
     %include "print_string_16.asm"
+    %include "read_disk.asm"
 
     ;=======================================================
     ; Data
@@ -42,6 +55,7 @@ initialise_cs:
 
 loading_message db 13, 10, '<Acorn>', 13, 10, 10, 0
 stage2_message db 'stage1: Loading stage2...', 0
+error_message db 13, 10, 'Error, system halted.', 0
 drive_number db 0
 
     ;=======================================================

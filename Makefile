@@ -33,7 +33,7 @@ acorn_engine.bin: loader/bootsect/bootsect.bin $(OBJ)
 	cat loader/bootsect/bootsect.bin loader/bootsect/stage2.bin > $@
 
 loader/bootsect/bootsect.bin: loader/bootsect/bootsect.asm
-	cd loader/bootsect && nasm bootsect.asm -fbin -o loader/bootsect/bootsect.bin
+	cd loader/bootsect && nasm bootsect.asm -fbin -o bootsect.bin
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INTERNAL_CFLAGS) -c $< -o $@
