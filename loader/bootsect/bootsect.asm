@@ -34,6 +34,11 @@ initialise_cs:
 
     jc error
 
+    mov si, done_message
+    call print_string_16
+
+    jmp 0x7e00                                          ; if we've got here - everything is loaded in memory - jump to the entry point!
+
 error:
     mov si, error_message
     call print_string_16
@@ -56,6 +61,7 @@ halt:
 loading_message db 13, 10, '<Acorn>', 13, 10, 10, 0
 stage2_message db 'stage1: Loading stage2...', 0
 error_message db 13, 10, 'Error, system halted.', 0
+done_message db 'DONE', 13, 10, 0
 drive_number db 0
 
     ;=======================================================

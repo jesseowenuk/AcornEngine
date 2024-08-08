@@ -93,7 +93,7 @@ read_sectors:
 
         mov si, 0x7000                              ; set the SI register to 0x7000
         mov ds, si                                  ; set the DS (Data Segment) register to 0x7000
-        mov esi, ebx                                ; move the buffer offset into the ESI register
+        mov edi, ebx                                ; move the buffer offset into the ESI register
         xor esi, esi                                ; zero out the ESI register?
 
         push ecx                                    ; save the ECX register
