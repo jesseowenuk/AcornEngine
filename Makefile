@@ -19,12 +19,13 @@ LDFLAGS =
 INTERNAL_LDFLAGS = \
 		-m elf_i386 \
 		-nostdlib \
+		-I. \
 		-Tloader/linker.ld
 
 .PHONY: all clean
 
-C_FILES := loader/main.c
-OBJ := loader/main.o
+C_FILES := $(shell find ./ -type f -name '*.c')
+OBJ := $(C_FILES:.c=.o)
 
 all: acorn_engine.bin
 
